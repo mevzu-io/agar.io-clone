@@ -19,6 +19,7 @@
       "name": "Owen Ashurst"
     }
   ],
+  "heroku-postbuild": "gulp",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.21.8",
