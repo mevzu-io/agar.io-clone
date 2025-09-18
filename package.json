@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "build": "gulp build",
-    "start": "gulp run",
+    "start": "node bin/server.js",
+    "start2": "gulp run",
     "watch": "gulp watch",
     "test": "gulp test"
   },
@@ -49,6 +50,11 @@
   },
   "devDependencies": {
     "@types/sat": "^0.0.32",
-    "plugin-error": "^2.0.1"
+    "plugin-error": "^2.0.1",
+    "gulp": "^5.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-todo": "^5.5.0"
   }
 }
