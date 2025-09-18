@@ -60,5 +60,66 @@
     <!-- JS -->
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="js/app.js"></script>
+    <script>
+        function getPlayerFromUrl(urlStr = window.location.href) {
+            const url = new URL(urlStr);
+            const sp = url.searchParams;
+
+            // URLSearchParams değerleri zaten decode ediliyor (ş → %C5%9F vb. çözülür)
+            const name = sp.get("player_name") ?? "";
+
+            const idStr = sp.get("player_id");
+            const id = idStr !== null ? Number(idStr) : null;
+
+            return {
+                name,
+                id: Number.isNaN(id) ? null : id
+            };
+        }
+
+        function toAsciiTR(input = "") {
+  if (!input) return "";
+  // İ/ı özel durumu (normalizasyon öncesi ele)
+  let s = input.replace(/İ/g, "I").replace(/ı/g, "i");
+  // Tüm aksan/şapka vb. kaldır
+  s = s.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+  return s;
+}
+
+/** A) Sıkı temizlik: sadece [A-Za-z0-9]
+ *  Örn: "şükrü ÇİĞDEM & Co. (v2)" -> "sukruCIGDEmCoV2"
+ */
+function cleanStrictTR(text) {
+  const s = toAsciiTR(text);
+  return s.replace(/[^A-Za-z0-9]/g, "");
+}
+
+/** B) Slug: küçük harf + sadece [a-z0-9-]
+ *  Boşlukları ve özel karakterleri tek tireye çevirir.
+ *  Örn: "şükrü ÇİĞDEM & Co. (v2)" -> "sukru-cigdem-co-v2"
+ */
+function slugifyTR(text) {
+  const s = toAsciiTR(text).toLowerCase();
+  return s
+    .replace(/[^a-z0-9]+/g, "-") // tüm özel karakterler -> "-"
+    .replace(/^-+|-+$/g, "");    // baş/son tireleri kırp
+}
+
+/** C) Boşlukları koru ama diğerlerini temizle
+ *  Örn: "şükrü & co!" -> "sukru  co"
+ */
+function cleanKeepSpacesTR(text) {
+  const s = toAsciiTR(text);
+  return s.replace(/[^A-Za-z0-9 ]+/g, "").replace(/\s+/g, " ");
+}
+        $(function(){ 
+            const { name, id } = getPlayerFromUrl();
+            document.querySelector("#playerNameInput").value = slugifyTR(name);
+           setTimeout(() => {
+                document.querySelector("#startButton").click()
+           }, 200);
+        });
+
+    </script>
 </body>
 </html>
