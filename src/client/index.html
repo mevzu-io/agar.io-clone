@@ -3,7 +3,7 @@
 <head>
     <!-- Meta Properties -->
     <meta charset="UTF-8">
-    <title>Open Agar</title>
+    <title>Mevzu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css" />
@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="gameAreaWrapper">
-        <div id="status"><span class="title">Leaderboard</span></div>
+        <div id="status"><span class="title">Sıralama</span></div>
         <div class="chatbox" id="chatbox">
             <ul id="chatList" class="chat-list"></ul>
             <input id="chatInput" type="text" class="chat-input" placeholder="Chat here..." maxlength="35" />
@@ -26,9 +26,8 @@
     </div>
     <div id="startMenuWrapper">
         <div id="startMenu">
-            <p>Open Agar</p>
             <input type="text" tabindex="0" autofocus placeholder="Enter your name here" id="playerNameInput" maxlength="25" />
-            <b class="input-error">Nick must be alphanumeric characters only!</b>
+            <b class="input-error">ups</b>
             <br />
             <a onclick="document.getElementById('spawn_cell').play();"><button id="startButton">Play</button></a>
             <button id="spectateButton">Spectate</button>
@@ -46,7 +45,7 @@
                     <label><input id="darkMode" type="checkbox">Toggle Dark Mode</label>
                 </ul>
             </div>
-            <div id="instructions">
+            <div id="instructions" style = "display:none;">
                 <h3>Gameplay</h3>
                 <ul>
                     <li>Move your mouse on the screen to move your character.</li>
