@@ -1,6 +1,7 @@
+const port = process.env.PORT || 1200
 module.exports = {
     host: "0.0.0.0",
-    port: 3000,
+    port: port,
     logpath: "logger.php",
     foodMass: 1,
     fireFood: 20,
